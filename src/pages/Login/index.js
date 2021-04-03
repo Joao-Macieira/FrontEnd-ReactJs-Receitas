@@ -1,18 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
 import { Container } from '../../styles/GlobalStyles';
 import { Title, Paragrafo } from './styled';
-import * as exampleActions from '../../store/modules/example/actions';
 
 export default function Login() {
-  const dispatch = useDispatch();
-
-  function handleClick(e) {
-    e.preventDefault();
-
-    dispatch(exampleActions.clickButtonRequest());
-  }
+  // const dispatch = useDispatch();
 
   return (
     <Container>
@@ -20,9 +13,7 @@ export default function Login() {
         Login <small>iai</small>
       </Title>
       <Paragrafo>Lorem ipsum</Paragrafo>
-      <button type="button" onClick={handleClick}>
-        Enviar
-      </button>
+      <button type="button">Enviar</button>
     </Container>
   );
 }
