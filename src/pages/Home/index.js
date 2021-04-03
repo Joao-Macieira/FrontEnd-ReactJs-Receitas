@@ -5,6 +5,8 @@ import api from '../../services/axios';
 import { Title, SubTitle, Container, RecipesArea } from './styled';
 
 export default function Login() {
+  const [filter, setFilter] = useState('');
+
   const [categories, setCategories] = useState([]);
   const [recipes, setRecipes] = useState([]);
 
@@ -18,18 +20,18 @@ export default function Login() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await api.get('/recipes');
+      const { data } = await api.get(`/recipes?categoria=${filter}`);
 
       setRecipes(data);
     })();
-  }, []);
+  }, [filter]);
 
   return (
     <Container>
       <Title>Receitas</Title>
       <p>Procurando uma especialidade?</p>
       Busque em nossas categorias:
-      <select>
+      <select onChange={(e) => setFilter(e.target.value)}>
         <option key={0} value="">
           Selecione a categoria
         </option>
