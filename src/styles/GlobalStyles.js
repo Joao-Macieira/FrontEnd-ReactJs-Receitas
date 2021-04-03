@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import * as colors from '../config/Colors';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -12,7 +12,7 @@ export default createGlobalStyle`
 
   body {
     font-family: sans-serif;
-    background: ${colors.primaryDarkColor};
+    background: ${colors.secondaryDarkColor};
     color: ${colors.primaryColor};
   }
 
@@ -46,13 +46,4 @@ export default createGlobalStyle`
   body .Toastify .Toastify__toast-container .Toastify__toast--error{
     background: ${colors.errorColor};
   }
-`;
-
-export const Container = styled.section`
-  max-width: 360px;
-  background: #fff;
-  margin: 30px auto;
-  padding: 30px;
-  border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
