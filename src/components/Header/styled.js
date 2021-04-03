@@ -15,3 +15,11 @@ export const Nav = styled.nav`
     font-weight: bold;
   }
 `;
+
+export const Container = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
