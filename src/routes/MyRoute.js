@@ -1,28 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export default function MyRoute({ component: Component, isClosed, ...rest }) {
-  const isLoggedIn = false;
+import { Context } from '../Context/AuthContext';
 
-  if (isClosed && !isLoggedIn) {
-    return (
-      <Redirect
-        to={{ pathname: '/login', state: { prevPath: rest.location.pathname } }}
-      />
-    );
+export default function MyRoute({ isPrivate, ...rest }) {
+  const { loading, authenticated } = useContext(Context);
+
+  if (loading) {
+    return <h1>Loading...</h1>;
   }
 
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  return <Route {...rest} component={Component} />;
+  if (isPrivate && !authenticated) {
+    return <Redirect to="/login" />;
+  }
+
+  return <Route {...rest} />;
 }
 
 MyRoute.defaultProps = {
-  isClosed: false,
+  isPrivate: false,
 };
 
 MyRoute.propTypes = {
   component: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
     .isRequired,
-  isClosed: PropTypes.bool,
+  isPrivate: PropTypes.bool,
 };
