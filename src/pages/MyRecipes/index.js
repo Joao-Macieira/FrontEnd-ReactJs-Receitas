@@ -20,15 +20,25 @@ export default function Login() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await api.get(`/recipes?categoria=${filter}`);
+      const { data } = await api.get(`/myrecipes?categoria=${filter}`);
 
       setRecipes(data);
     })();
   }, [filter]);
 
+  function newRecipeHandler() {
+    window.location.href = '/nova-receita';
+  }
+
   return (
     <Container>
-      <Title>Receitas</Title>
+      <Title>Minhas Receitas</Title>
+      <span className="newRecipeArea">
+        Cadastre um receita nova:{' '}
+        <button type="button" onClick={newRecipeHandler}>
+          Cadastrar nova receita
+        </button>
+      </span>
       <p>Procurando uma especialidade?</p>
       Busque em nossas categorias:
       <select onChange={(e) => setFilter(e.target.value)}>

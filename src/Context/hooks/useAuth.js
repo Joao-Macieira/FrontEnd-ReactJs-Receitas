@@ -24,6 +24,7 @@ export default function useAuth() {
     } = await axios.post('/login', { login, password });
 
     localStorage.setItem('token', JSON.stringify(token));
+    localStorage.setItem('login', JSON.stringify(login));
     axios.defaults.headers.Authorization = `Bearer ${token}`;
     setAuthenticated(true);
     history.push('/');
@@ -32,6 +33,7 @@ export default function useAuth() {
   function handleLogout() {
     setAuthenticated(false);
     localStorage.removeItem('token');
+    localStorage.removeItem('login');
     axios.defaults.headers.Authorization = undefined;
     history.push('/login');
   }

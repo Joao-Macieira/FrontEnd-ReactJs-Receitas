@@ -27,6 +27,17 @@ export const Container = styled.div`
   color: #000;
   letter-spacing: 1px;
 
+  .newRecipeArea {
+    line-height: 48px;
+    color: ${colors.primaryColor};
+    font-size: 24px;
+
+    button {
+      padding: 4px 8px;
+      font-size: 16px;
+    }
+  }
+
   select {
     font-size: 16px;
     padding: 4px 8px;
