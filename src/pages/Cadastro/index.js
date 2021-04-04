@@ -1,21 +1,49 @@
-import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
-import { Context } from '../../Context/AuthContext';
+import axios from '../../services/axios';
+import history from '../../services/history';
 
 import { Title, Container, Form } from './styled';
 
 export default function Login() {
-  const { handleLogin } = useContext(Context);
-
+  const [name, setName] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    if (!name || !login || !password) {
+      return toast.error('Preencha todos os dados');
+    }
+
+    const { data } = await axios.post('/user', {
+      name,
+      login,
+      password,
+    });
+
+    if (data.error) return toast.error(data.error);
+
+    toast.success('Conta criada com sucesso');
+    return history.push('/login');
+  }
+
   return (
     <Container>
-      <Form>
-        <Title>Seja Bem-vindo</Title>
+      <Form onSubmit={handleSubmit}>
+        <Title>Faça seu Cadastro</Title>
         <label htmlFor="name">
+          Nome:{' '}
+          <input
+            type="text"
+            placeholder="Nome..."
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
+
+        <label htmlFor="login">
           Login:{' '}
           <input
             type="text"
@@ -32,15 +60,7 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <button type="button" onClick={() => handleLogin(login, password)}>
-          Entrar
-        </button>
-
-        <small>
-          <Link to="/cadastro">
-            Ainda não possui conta ? Se cadastre clicando aqui !
-          </Link>
-        </small>
+        <button type="submit">Entrar</button>
       </Form>
     </Container>
   );
