@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { FaTrash } from 'react-icons/fa';
 
-import api from '../../services/axios';
+import axios from '../../services/axios';
 
 import { Title, SubTitle, Container, RecipesArea } from './styled';
 
@@ -12,7 +14,7 @@ export default function Login() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await api.get('/category');
+      const { data } = await axios.get('/category');
 
       setCategories(data);
     })();
@@ -20,7 +22,7 @@ export default function Login() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await api.get(`/myrecipes?categoria=${filter}`);
+      const { data } = await axios.get(`/myrecipes?categoria=${filter}`);
 
       setRecipes(data);
     })();
@@ -28,6 +30,34 @@ export default function Login() {
 
   function newRecipeHandler() {
     window.location.href = '/nova-receita';
+  }
+
+  function handleDeleteAsk(e) {
+    e.preventDefault();
+    const exclamation = e.currentTarget.nextSibling;
+
+    exclamation.setAttribute('display', 'block');
+    e.currentTarget.remove();
+  }
+
+  async function handleDelete(id) {
+    let formError = false;
+
+    if (!id) {
+      toast.error('Error na exclusão');
+
+      formError = true;
+    }
+
+    if (formError) return;
+
+    const { data } = await axios.delete(`/recipe/${id}`);
+
+    if (data.error) {
+      toast.error(data.error);
+    } else {
+      window.location.reload();
+    }
   }
 
   return (
@@ -53,8 +83,8 @@ export default function Login() {
       </select>
       <hr />
       {recipes.map((recipe) => (
-        <div className="Recipes">
-          <RecipesArea key={recipe.id}>
+        <RecipesArea key={recipe.id}>
+          <div className="Recipes">
             <div className="leftSide">
               <Title>{recipe.nome}</Title>
               <div className="detailsArea">
@@ -83,17 +113,27 @@ export default function Login() {
                 ))}
               </ul>
             </div>
-          </RecipesArea>
-          <div className="actionArea">
-            <button className="printOut" type="button">
-              Imprimir
-            </button>
-            <button className="edit" type="button">
-              Editar
-            </button>
-            <button type="button">Excluir</button>
+
+            <div className="actionArea">
+              <button className="printOut" type="button">
+                Imprimir
+              </button>
+              <button className="edit" type="button">
+                Editar
+              </button>
+              <button type="button" onClick={handleDeleteAsk}>
+                Excluir
+              </button>
+              <FaTrash
+                className="deleteConfirm"
+                onClick={() => handleDelete(recipe.id)}
+                size={24}
+                display="none"
+                cursor="pointer"
+              />
+            </div>
           </div>
-        </div>
+        </RecipesArea>
       ))}
     </Container>
   );
