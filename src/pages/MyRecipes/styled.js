@@ -43,6 +43,23 @@ export const Container = styled.div`
     padding: 4px 8px;
     margin: 8px 4px;
   }
+
+  .actionArea {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-bottom: 1px solid ${colors.secondaryColor};
+    margin: 8px 0;
+    padding: 16px;
+
+    .printOut {
+      background: ${colors.successColor};
+    }
+
+    .edit {
+      background: ${colors.secondaryDarkColor};
+    }
+  }
 `;
 
 export const RecipesArea = styled.div`
@@ -51,7 +68,6 @@ export const RecipesArea = styled.div`
   align-items: center;
   flex-wrap: wrap;
   padding: 8px;
-  border-bottom: 1px solid ${colors.secondaryColor};
 
   .leftSide {
     width: 100%;

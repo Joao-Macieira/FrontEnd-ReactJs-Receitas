@@ -53,36 +53,47 @@ export default function Login() {
       </select>
       <hr />
       {recipes.map((recipe) => (
-        <RecipesArea key={recipe.id}>
-          <div className="leftSide">
-            <Title>{recipe.nome}</Title>
-            <div className="detailsArea">
-              <span>Autor: {recipe.autor}</span>
-              <span>Categoria: {recipe.categoria}</span>
+        <div className="Recipes">
+          <RecipesArea key={recipe.id}>
+            <div className="leftSide">
+              <Title>{recipe.nome}</Title>
+              <div className="detailsArea">
+                <span>Autor: {recipe.autor}</span>
+                <span>Categoria: {recipe.categoria}</span>
 
-              <span>Nº de Porções: {recipe.porcoes}</span>
-              <span>
-                Tempo de preparo: {recipe.tempo_preparo_minutos} minutos
-              </span>
+                <span>Nº de Porções: {recipe.porcoes}</span>
+                <span>
+                  Tempo de preparo: {recipe.tempo_preparo_minutos} minutos
+                </span>
+              </div>
             </div>
+            <div className="rightSide">
+              <SubTitle>Modo de Preparo</SubTitle>
+              <ul>
+                {recipe.modo_preparo.split(',').map((prepair) => (
+                  <li key={prepair}>{prepair}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="downSide">
+              <SubTitle>Ingredientes</SubTitle>
+              <ul>
+                {recipe.ingredientes.split(',').map((ingrediente) => (
+                  <li key={ingrediente}>{ingrediente}</li>
+                ))}
+              </ul>
+            </div>
+          </RecipesArea>
+          <div className="actionArea">
+            <button className="printOut" type="button">
+              Imprimir
+            </button>
+            <button className="edit" type="button">
+              Editar
+            </button>
+            <button type="button">Excluir</button>
           </div>
-          <div className="rightSide">
-            <SubTitle>Modo de Preparo</SubTitle>
-            <ul>
-              {recipe.modo_preparo.split(',').map((prepair) => (
-                <li key={prepair}>{prepair}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="downSide">
-            <SubTitle>Ingredientes</SubTitle>
-            <ul>
-              {recipe.ingredientes.split(',').map((ingrediente) => (
-                <li key={ingrediente}>{ingrediente}</li>
-              ))}
-            </ul>
-          </div>
-        </RecipesArea>
+        </div>
       ))}
     </Container>
   );
