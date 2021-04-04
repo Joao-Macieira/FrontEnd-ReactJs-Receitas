@@ -18,15 +18,15 @@ export default function useAuth() {
     setLoading(false);
   }, []);
 
-  async function handleLogin() {
+  async function handleLogin(login, password) {
     const {
       data: { token },
-    } = await axios.post('/login');
+    } = await axios.post('/login', { login, password });
 
     localStorage.setItem('token', JSON.stringify(token));
     axios.defaults.headers.Authorization = `Bearer ${token}`;
     setAuthenticated(true);
-    history.push('/users');
+    history.push('/');
   }
 
   function handleLogout() {

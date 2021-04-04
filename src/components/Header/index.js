@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaHome, FaSignInAlt, FaUserAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+
+import { Context } from '../../Context/AuthContext';
 
 import { Nav, Container } from './styled';
 
 export default function Header() {
-  const token = localStorage.getItem('token');
+  const { authenticated, handleLogout } = useContext(Context);
 
   return (
     <Nav>
@@ -20,9 +22,12 @@ export default function Header() {
             <p>Login</p> <FaUserAlt size={24} />
           </span>
         </Link>
-        {token === '' && (
-          <Link to="/eu">
-            <FaSignInAlt size={24} />
+        {authenticated && (
+          <Link to="/" onClick={handleLogout}>
+            <span>
+              {' '}
+              <p>Logout</p> <FaSignInAlt size={24} />
+            </span>
           </Link>
         )}
       </Container>
