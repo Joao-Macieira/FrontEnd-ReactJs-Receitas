@@ -21,7 +21,7 @@ export default function useAuth() {
   async function handleLogin() {
     const {
       data: { token },
-    } = await axios.post('/authenticate');
+    } = await axios.post('/login');
 
     localStorage.setItem('token', JSON.stringify(token));
     axios.defaults.headers.Authorization = `Bearer ${token}`;

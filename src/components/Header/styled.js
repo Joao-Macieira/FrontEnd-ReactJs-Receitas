@@ -13,6 +13,10 @@ export const Nav = styled.nav`
     color: #fff;
     margin: 0 10px 0 0;
     font-weight: bold;
+
+    p {
+      margin-right: 4px;
+    }
   }
 `;
 
@@ -22,4 +26,9 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
+  span {
+    display: flex;
+    align-items: center;
+  }
 `;
