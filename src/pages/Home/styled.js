@@ -47,12 +47,6 @@ export const RecipesArea = styled.div`
     max-width: 400px;
     padding-right: 4px;
 
-    .autorArea {
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-    }
-
     .detailsArea {
       display: flex;
       flex-direction: column;

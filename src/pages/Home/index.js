@@ -46,11 +46,10 @@ export default function Login() {
         <RecipesArea key={recipe.id}>
           <div className="leftSide">
             <Title>{recipe.nome}</Title>
-            <div className="autorArea">
+            <div className="detailsArea">
               <span>Autor: {recipe.autor}</span>
               <span>Categoria: {recipe.categoria}</span>
-            </div>
-            <div className="detailsArea">
+
               <span>Nº de Porções: {recipe.porcoes}</span>
               <span>
                 Tempo de preparo: {recipe.tempo_preparo_minutos} minutos
