@@ -6,7 +6,7 @@ import history from '../../services/history';
 
 import { Title, Container, Form } from './styled';
 
-export default function Login() {
+export default function NewRecipe() {
   const [categoryId, setCategoryId] = useState('');
   const [name, setName] = useState('');
   const [preparationTime, setPreparationTime] = useState('');

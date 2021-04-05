@@ -6,7 +6,7 @@ import axios from '../../services/axios';
 
 import { Title, SubTitle, Container, RecipesArea } from './styled';
 
-export default function Login() {
+export default function MyRecipes() {
   const [filter, setFilter] = useState('');
 
   const [categories, setCategories] = useState([]);
