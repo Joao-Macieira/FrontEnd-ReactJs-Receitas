@@ -11,24 +11,51 @@ export class Impression {
 
   creatBody() {
     const body = [
-      { text: 'Receita', style: 'header' },
-      { text: `Vamos fazer ${this.impressionData.nome}` },
       {
-        text: `Tempo de preparo é de ${this.impressionData.tempo_preparo_minutos} e renderá ${this.impressionData.porcoes}`,
+        text: 'Receita de Hoje',
+        bold: true,
+        fontSize: 32,
+        alignment: 'center',
+        margin: [0, 0, 0, 32],
       },
-      { text: 'Modo de Preparo', style: 'header' },
       {
-        ul: [
-          this.impressionData.modo_preparo.split(',').map((prepair) => prepair),
-        ],
+        text: `Vamos fazer ${this.impressionData.nome} ?`,
+        fontSize: 16,
+        alignment: 'center',
+        margin: [0, 0, 0, 24],
       },
-      { text: 'Ingredientes', style: 'header' },
       {
-        ul: [
-          this.impressionData.ingredientes
-            .split(',')
-            .map((ingredient) => ingredient),
-        ],
+        text: `Tempo de preparo é de ${this.impressionData.tempo_preparo_minutos} minutos e renderá ${this.impressionData.porcoes} porções`,
+        fontSize: 12,
+        margin: [0, 0, 0, 24],
+      },
+      {
+        text: 'Ingredientes',
+        bold: true,
+        fontSize: 24,
+        alignment: 'center',
+        margin: [0, 0, 0, 24],
+      },
+      {
+        ul: this.impressionData.ingredientes
+          .split(',')
+          .map((ingredient) => [ingredient]),
+        fontSize: 16,
+        margin: [0, 0, 0, 24],
+      },
+      {
+        text: 'Modo de Preparo',
+        bold: true,
+        fontSize: 24,
+        alignment: 'center',
+        margin: [0, 0, 0, 24],
+      },
+      {
+        ul: this.impressionData.modo_preparo
+          .split(',')
+          .map((prepair) => [prepair]),
+        fontSize: 16,
+        margin: [0, 0, 0, 24],
       },
     ];
 
