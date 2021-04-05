@@ -32,6 +32,10 @@ export default function Login() {
     window.location.href = '/nova-receita';
   }
 
+  function handleEdit(id) {
+    window.location.href = `/receita/${id}`;
+  }
+
   function handleDeleteAsk(e) {
     e.preventDefault();
     const exclamation = e.currentTarget.nextSibling;
@@ -118,7 +122,11 @@ export default function Login() {
               <button className="printOut" type="button">
                 Imprimir
               </button>
-              <button className="edit" type="button">
+              <button
+                className="edit"
+                type="button"
+                onClick={() => handleEdit(recipe.id)}
+              >
                 Editar
               </button>
               <button type="button" onClick={handleDeleteAsk}>
