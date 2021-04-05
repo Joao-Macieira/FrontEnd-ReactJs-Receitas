@@ -1,10 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 
-import api from '../../services/axios';
+import { Context } from '../../Context/AuthContext';
+
+import axios from '../../services/axios';
+
+import { Impression } from '../../Helpers/printRecipes';
 
 import { Title, SubTitle, Container, RecipesArea } from './styled';
+import history from '../../services/history';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export default function Home() {
+  const { authenticated } = useContext(Context);
+
   const [filter, setFilter] = useState('');
 
   const [categories, setCategories] = useState([]);
@@ -12,7 +23,7 @@ export default function Home() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await api.get('/category');
+      const { data } = await axios.get('/category');
 
       setCategories(data);
     })();
@@ -20,11 +31,22 @@ export default function Home() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await api.get(`/recipes?categoria=${filter}`);
+      const { data } = await axios.get(`/recipes?categoria=${filter}`);
 
       setRecipes(data);
     })();
   }, [filter]);
+
+  async function handleView(id) {
+    if (!authenticated) {
+      history.push('/login');
+    } else {
+      const { data } = await axios.get(`/recipe/${id}`);
+      const impressionClass = new Impression(data);
+      const document = await impressionClass.documentPrepare();
+      pdfMake.createPdf(document).open({}, window.open('', '_blank'));
+    }
+  }
 
   return (
     <Container>
@@ -44,33 +66,45 @@ export default function Home() {
       <hr />
       {recipes.map((recipe) => (
         <RecipesArea key={recipe.id}>
-          <div className="leftSide">
-            <Title>{recipe.nome}</Title>
-            <div className="detailsArea">
-              <span>Autor: {recipe.autor}</span>
-              <span>Categoria: {recipe.categoria}</span>
+          <div className="Recipes">
+            <div className="leftSide">
+              <Title>{recipe.nome}</Title>
+              <div className="detailsArea">
+                <span>Autor: {recipe.autor}</span>
+                <span>Categoria: {recipe.categoria}</span>
 
-              <span>Nº de Porções: {recipe.porcoes}</span>
-              <span>
-                Tempo de preparo: {recipe.tempo_preparo_minutos} minutos
-              </span>
+                <span>Nº de Porções: {recipe.porcoes}</span>
+                <span>
+                  Tempo de preparo: {recipe.tempo_preparo_minutos} minutos
+                </span>
+              </div>
             </div>
-          </div>
-          <div className="rightSide">
-            <SubTitle>Modo de Preparo</SubTitle>
-            <ul>
-              {recipe.modo_preparo.split(',').map((prepair) => (
-                <li key={prepair}>{prepair}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="downSide">
-            <SubTitle>Ingredientes</SubTitle>
-            <ul>
-              {recipe.ingredientes.split(',').map((ingrediente) => (
-                <li key={ingrediente}>{ingrediente}</li>
-              ))}
-            </ul>
+            <div className="rightSide">
+              <SubTitle>Modo de Preparo</SubTitle>
+              <ul>
+                {recipe.modo_preparo.split(',').map((prepair) => (
+                  <li key={prepair}>{prepair}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="downSide">
+              <SubTitle>Ingredientes</SubTitle>
+              <ul>
+                {recipe.ingredientes.split(',').map((ingrediente) => (
+                  <li key={ingrediente}>{ingrediente}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="actionArea">
+              <button
+                className="printOut"
+                type="button"
+                onClick={() => handleView(recipe.id)}
+              >
+                Imprimir Receita
+              </button>
+            </div>
           </div>
         </RecipesArea>
       ))}

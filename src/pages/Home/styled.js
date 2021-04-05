@@ -37,10 +37,40 @@ export const Container = styled.div`
 export const RecipesArea = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
   padding: 8px;
-  border-bottom: 1px solid ${colors.secondaryColor};
+
+  .Recipes {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 8px;
+
+    .actionArea {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      border-bottom: 1px solid ${colors.secondaryColor};
+      margin: 8px 0;
+      padding: 16px;
+
+      .printOut {
+        background: ${colors.successColor};
+      }
+
+      .edit {
+        background: ${colors.secondaryDarkColor};
+      }
+
+      .deleteConfirm {
+        color: ${colors.primaryColor};
+      }
+    }
+  }
 
   .leftSide {
     width: 100%;
