@@ -6,7 +6,7 @@ import history from '../../services/history';
 
 import { Title, Container, Form } from './styled';
 
-export default function Login() {
+export default function SignIn() {
   const [name, setName] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
