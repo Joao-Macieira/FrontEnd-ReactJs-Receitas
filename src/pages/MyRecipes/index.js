@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { FaTrash } from 'react-icons/fa';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 
 import axios from '../../services/axios';
 
+import { Impression } from '../../Helpers/printRecipes';
+
 import { Title, SubTitle, Container, RecipesArea } from './styled';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export default function MyRecipes() {
   const [filter, setFilter] = useState('');
@@ -42,6 +48,13 @@ export default function MyRecipes() {
 
     exclamation.setAttribute('display', 'block');
     e.currentTarget.remove();
+  }
+
+  async function handleView(id) {
+    const { data } = await axios.get(`/recipe/${id}`);
+    const impressionClass = new Impression(data);
+    const document = await impressionClass.documentPrepare();
+    pdfMake.createPdf(document).open({}, window.open('', '_blank'));
   }
 
   async function handleDelete(id) {
@@ -119,7 +132,11 @@ export default function MyRecipes() {
             </div>
 
             <div className="actionArea">
-              <button className="printOut" type="button">
+              <button
+                className="printOut"
+                type="button"
+                onClick={() => handleView(recipe.id)}
+              >
                 Imprimir
               </button>
               <button
