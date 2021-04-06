@@ -16,7 +16,7 @@ export const Paragrafo = styled.p`
 `;
 
 export const Container = styled.div`
-  width: 100%;
+  width: 90%;
   max-width: 1200px;
   margin: 10px auto;
   padding: 8px;
