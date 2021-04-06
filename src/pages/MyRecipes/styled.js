@@ -16,7 +16,7 @@ export const Paragrafo = styled.p`
 `;
 
 export const Container = styled.div`
-  width: 100%;
+  width: 90%;
   max-width: 1200px;
   margin: 10px auto;
   padding: 8px;
@@ -58,6 +58,12 @@ export const Container = styled.div`
 
     .edit {
       background: ${colors.secondaryDarkColor};
+    }
+  }
+
+  @media (max-width: 350px) {
+    select {
+      width: 90%;
     }
   }
 `;
@@ -119,6 +125,14 @@ export const RecipesArea = styled.div`
     max-width: 400px;
   }
 
-  .downSide {
+  @media (max-width: 400px) {
+    .actionArea {
+      flex-direction: column;
+
+      button {
+        width: 50%;
+        margin-bottom: 4px;
+      }
+    }
   }
 `;
