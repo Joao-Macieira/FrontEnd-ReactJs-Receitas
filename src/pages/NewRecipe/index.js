@@ -111,7 +111,7 @@ export default function NewRecipe() {
         <label htmlFor="method">
           Modo de preparo:{' '}
           <small>
-            Separe o modo de preparo com vírgulas apenas, não use números, hífen
+            Separe o modo de preparo com vírgulas APENAS, não use números, hífen
             e etc
           </small>
           <textarea
