@@ -24,6 +24,10 @@ export default function NewRecipe() {
     })();
   }, []);
 
+  function handleBack() {
+    history.push('/minha-conta');
+  }
+
   async function handlerSubmit(e) {
     e.preventDefault();
 
@@ -63,6 +67,9 @@ export default function NewRecipe() {
     <Container>
       <Form onSubmit={handlerSubmit}>
         <Title>Cadastre sua Receita</Title>
+        <button className="backButton" type="button" onClick={handleBack}>
+          Página anterior
+        </button>
         Categoria:
         <select onChange={(e) => setCategoryId(e.target.value)}>
           <option key={0} value="">

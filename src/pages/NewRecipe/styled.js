@@ -73,6 +73,13 @@ export const Form = styled.form`
     justify-content: space-between;
   }
 
+  .backButton {
+    width: 100%;
+    max-width: 200px;
+    align-self: flex-end;
+    background: ${colors.primaryDarkColor};
+  }
+
   @media (max-width: 630px) {
     .numberArea {
       flex-direction: column;
