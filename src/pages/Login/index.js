@@ -11,9 +11,15 @@ export default function Login() {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    handleLogin(login, password);
+  }
+
   return (
     <Container>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Title>Seja Bem-vindo</Title>
         <label htmlFor="name">
           Login:{' '}
@@ -32,9 +38,7 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <button type="button" onClick={() => handleLogin(login, password)}>
-          Entrar
-        </button>
+        <button type="submit">Entrar</button>
 
         <small>
           <Link to="/cadastro">
