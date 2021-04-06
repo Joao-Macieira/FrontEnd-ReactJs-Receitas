@@ -7,7 +7,7 @@ export const Title = styled.h1`
 `;
 
 export const Container = styled.div`
-  width: 100%;
+  width: 90%;
   max-width: 1200px;
   display: flex;
   align-items: center;
@@ -78,5 +78,15 @@ export const Form = styled.form`
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  @media (max-width: 630px) {
+    .numberArea {
+      flex-direction: column;
+
+      label {
+        width: 100%;
+      }
+    }
   }
 `;
