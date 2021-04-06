@@ -7,7 +7,7 @@ export const Title = styled.h1`
 `;
 
 export const Container = styled.div`
-  width: 100%;
+  width: 90%;
   max-width: 1200px;
   display: flex;
   align-items: center;

@@ -60,7 +60,7 @@ export default function SignIn() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <button type="submit">Entrar</button>
+        <button type="submit">Cadastrar</button>
       </Form>
     </Container>
   );
