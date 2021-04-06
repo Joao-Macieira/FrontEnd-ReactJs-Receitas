@@ -16,7 +16,7 @@ export const Container = styled.div`
 `;
 
 export const Form = styled.form`
-  width: 100%;
+  width: 90%;
   max-width: 600px;
   background: #fff;
   display: flex;
