@@ -32,6 +32,12 @@ export const Container = styled.div`
     padding: 4px 8px;
     margin: 8px 4px;
   }
+
+  @media (max-width: 350px) {
+    select {
+      width: 90%;
+    }
+  }
 `;
 
 export const RecipesArea = styled.div`
@@ -89,8 +95,5 @@ export const RecipesArea = styled.div`
   .rightSide {
     width: 100%;
     max-width: 400px;
-  }
-
-  .downSide {
   }
 `;
